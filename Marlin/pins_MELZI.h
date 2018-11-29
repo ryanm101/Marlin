@@ -30,3 +30,4 @@
 
 #define IS_MELZI
 #include "pins_SANGUINOLOLU_12.h"
+#define Z_MIN_PROBE_PIN 20

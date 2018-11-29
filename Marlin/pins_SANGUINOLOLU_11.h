@@ -65,7 +65,6 @@
 #define X_STOP_PIN         18
 #define Y_STOP_PIN         19
 #define Z_STOP_PIN         20
-
 //
 // Steppers
 //
@@ -97,7 +96,7 @@
   #define HEATER_BED_PIN   12   // (bed)
   #define X_ENABLE_PIN     14
   #define Y_ENABLE_PIN     14
-  #define Z_ENABLE_PIN     26
+  #define Z_ENABLE_PIN     14
   #define E0_ENABLE_PIN    14
 
   #if !defined(FAN_PIN) && ENABLED(LCD_I2C_PANELOLU2)
@@ -138,7 +137,7 @@
 #endif
 
 #if DISABLED(SPINDLE_LASER_ENABLE) && ENABLED(SANGUINOLOLU_V_1_2) && !(ENABLED(ULTRA_LCD) && ENABLED(NEWPANEL))  // try to use IO Header
-  #define CASE_LIGHT_PIN     4   // MUST BE HARDWARE PWM  - see if IO Header is available
+  #define CASE_LIGHT_PIN     27   // MUST BE HARDWARE PWM  - see if IO Header is available
 #endif
 
 /**
@@ -161,19 +160,19 @@
 
       #if ENABLED(IS_MELZI)
         #define LCD_PINS_RS     30   // CS chip select /SS chip slave select
-        #define LCD_PINS_ENABLE 29   // SID (MOSI)
-        #define LCD_PINS_D4     17   // SCK (CLK) clock
+        #define LCD_PINS_ENABLE 28   // SID (MOSI)
+        #define LCD_PINS_D4     16   // SCK (CLK) clock
         // Pin 27 is taken by LED_PIN, but Melzi LED does nothing with
         // Marlin so this can be used for BEEPER_PIN. You can use this pin
         // with M42 instead of BEEPER_PIN.
-        #define BEEPER_PIN      27
+        #define BEEPER_PIN      -1
       #else        // Sanguinololu >=1.3
-        #define LCD_PINS_RS      4
-        #define LCD_PINS_ENABLE 17
-        #define LCD_PINS_D4     30
-        #define LCD_PINS_D5     29
-        #define LCD_PINS_D6     28
-        #define LCD_PINS_D7     27
+        #define LCD_PINS_RS     30
+        #define LCD_PINS_ENABLE 28
+        #define LCD_PINS_D4     16
+        #define LCD_PINS_D5     17
+        #define LCD_PINS_D6     27
+        #define LCD_PINS_D7     29
       #endif
 
     #else // DOGM SPI LCD Support
@@ -184,7 +183,7 @@
       #if ENABLED(MAKRPANEL)
 
         #define BEEPER_PIN      29
-        #define DOGLCD_CS       17
+        #define DOGLCD_CS       29
         #define LCD_BACKLIGHT_PIN 28   // PA3
 
       #elif ENABLED(IS_MELZI)
@@ -208,12 +207,12 @@
 
   #else // !DOGLCD
 
-    #define LCD_PINS_RS          4
-    #define LCD_PINS_ENABLE     17
-    #define LCD_PINS_D4         30
-    #define LCD_PINS_D5         29
-    #define LCD_PINS_D6         28
-    #define LCD_PINS_D7         27
+    #define LCD_PINS_RS        30//4
+     #define LCD_PINS_ENABLE    28//17
+     #define LCD_PINS_D4        16//SDA
+     #define LCD_PINS_D5        17//SCL
+     #define LCD_PINS_D6        27//A4
+     #define LCD_PINS_D7        29//A2
 
   #endif // !DOGLCD
 
@@ -226,17 +225,17 @@
       #define BTN_ENC           29
       #define LCD_SDSS          30   // Panelolu2 SD card reader rather than the Melzi
     #else
-      #define BTN_ENC           30
+      #define BTN_ENC           16
     #endif
 
   #elif ENABLED(LCD_FOR_MELZI)
 
-    #define LCD_PINS_RS         17
-    #define LCD_PINS_ENABLE     16
-    #define LCD_PINS_D4         11
-    #define BTN_ENC             28
-    #define BTN_EN1             29
-    #define BTN_EN2             30
+    #define LCD_PINS_RS         30
+    #define LCD_PINS_ENABLE     28
+    #define LCD_PINS_D4         16
+    #define BTN_ENC             26
+    #define BTN_EN1             11
+    #define BTN_EN2             10
 
     #ifndef ST7920_DELAY_1
       #define ST7920_DELAY_1 DELAY_NS(0)
@@ -264,8 +263,8 @@
 
   #else  // !LCD_I2C_PANELOLU2 && !LCD_FOR_MELZI && !ZONESTAR_LCD
 
-    #define BTN_ENC             16
-    #define LCD_SDSS            28   // Smart Controller SD card reader rather than the Melzi
+    #define BTN_ENC             26
+    #define LCD_SDSS            31   // Smart Controller SD card reader rather than the Melzi
 
   #endif
 
